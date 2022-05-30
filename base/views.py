@@ -45,7 +45,7 @@ def receiver(request):
     sim = Aer.get_backend("aer_simulator")
 
     if M == "x":
-        qc.x(Q)
+        qc.x(int(Q))
         qc.draw()
         
         qc.save_statevector()
@@ -98,7 +98,7 @@ def sender(request):
     sim = Aer.get_backend("aer_simulator")
 
     if M == "x":
-        qc.x(Q)
+        qc.x(int(Q))
         qc.draw()
         
         qc.save_statevector()
