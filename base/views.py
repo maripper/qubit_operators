@@ -45,6 +45,7 @@ def receiver(request):
     sim = Aer.get_backend("aer_simulator")
 
     if M == "x":
+        print("INT Q:  ",int(Q))
         qc.x(int(Q))
         qc.draw()
         
@@ -54,7 +55,8 @@ def receiver(request):
         # print(state)    
         # plot_bloch_multivector(state)
     else:
-        qc.z(0)
+        print("INT Q:  ",int(Q))
+        qc.z(int(Q))
         qc.draw()
         
         qc.save_statevector()
@@ -91,13 +93,14 @@ def sender(request):
     file.close()
 
     response = request.POST
+    sim = Aer.get_backend("aer_simulator")
     Q = response["bit"]
     qc = QuantumCircuit(1)
     
     print(response)
-    sim = Aer.get_backend("aer_simulator")
 
     if M == "x":
+        print("INT Q:  ",int(Q))
         qc.x(int(Q))
         qc.draw()
         
