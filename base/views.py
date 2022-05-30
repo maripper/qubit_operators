@@ -19,7 +19,7 @@ def restart(request):
     file.close()
     file = open("data_S.txt","w")
     file.close()
-    return JsonResponse({'status':'Success'})
+    return JsonResponse({"status":"Success"})
 
 @csrf_exempt
 def receiver(request):
@@ -29,9 +29,9 @@ def receiver(request):
     content = file.read()
     print(content)
 
-    M = ['x', 'z']
-    print(random.choice(Q))
-    M = random.choice(Q)
+    M = ["x", "z"]
+    print(random.choice(M))
+    M = random.choice(M)
 
     content = f"\n{M}"
     file.write(content)
@@ -42,9 +42,9 @@ def receiver(request):
     qc = QuantumCircuit(1)
     
     print(response)
-    sim = Aer.get_backend('aer_simulator')
+    sim = Aer.get_backend("aer_simulator")
 
-    if M == 'x':
+    if M == "x":
         qc.x(Q)
         qc.draw()
         
@@ -63,7 +63,7 @@ def receiver(request):
         # print(state)
         # plot_bloch_multivector(state)
     
-    R = str(state).split('[')[1].split(']')[0].split(',')[1].split('.')[0]
+    R = str(state).split("[")[1].split("]")[0].split(",")[1].split(".")[0]
     
     file = open("data_R.txt", "a+")
     file.seek(0)
@@ -73,7 +73,7 @@ def receiver(request):
     file.write(content)
     file.close()
 
-    return JsonResponse({'resp':'1'})
+    return JsonResponse({"resp":"1"})
 @csrf_exempt
 def sender(request):
     
@@ -82,9 +82,9 @@ def sender(request):
     content = file.read()
     print(content)
 
-    M = ['x', 'z']
-    print(random.choice(Q))
-    M = random.choice(Q)
+    M = ["x", "z"]
+    print(random.choice(M))
+    M = random.choice(M)
 
     content = f"\n{M}"
     file.write(content)
@@ -95,9 +95,9 @@ def sender(request):
     qc = QuantumCircuit(1)
     
     print(response)
-    sim = Aer.get_backend('aer_simulator')
+    sim = Aer.get_backend("aer_simulator")
 
-    if M == 'x':
+    if M == "x":
         qc.x(Q)
         qc.draw()
         
@@ -116,7 +116,7 @@ def sender(request):
         # print(state)
         # plot_bloch_multivector(state)
     
-    S = str(state).split('[')[1].split(']')[0].split(',')[1].split('.')[0]
+    S = str(state).split("[")[1].split("]")[0].split(",")[1].split(".")[0]
         
     file = open("data_S.txt", "a+")
     file.seek(0)
@@ -126,23 +126,23 @@ def sender(request):
     file.write(content)
     file.close()
 
-    return JsonResponse({'resp':'1'})
+    return JsonResponse({"resp":"1"})
 
 @csrf_exempt
 def compare(request):
     data = json.loads(request.body)
     print(data)
-    with open('measurements_S.txt') as file:
+    with open("measurements_S.txt") as file:
         file = file.readlines()
         MS = [f.replace("\n","") for f in file]
         print(MS)
-    with open('measurements_R.txt') as file:
+    with open("measurements_R.txt") as file:
         file = file.readlines()
         MR = [f.replace("\n","") for f in file]
         print(MR)
     i=0
     common_ground = []
-    while(i<data['size']):
+    while(i<data["size"]):
         if(MR[i]==MS[i]):
             common_ground.append(i)
         i=i+1
@@ -155,11 +155,11 @@ def compare(request):
         common_ground.remove(choice)
     crypto_key_ind = [item for item in common_ground_control if item not in compare]
     
-    with open('data_S.txt') as file:
+    with open("data_S.txt") as file:
         file = file.readlines()
         DS = [f.replace("\n","") for f in file]
         print(DS)
-    with open('data_R.txt') as file:
+    with open("data_R.txt") as file:
         file = file.readlines()
         DR = [f.replace("\n","") for f in file]
         print(DR)
@@ -176,7 +176,7 @@ def compare(request):
         cryptokey_msg.append(MR[crypto_key_ind[i]])
 
 
-    return JsonResponse({'compare':compare,'cryptographic':crypto_key_ind,'compare_data_R':compare_data_R,'compare_data_S':compare_data_S,'compare_msg':compare_msg,'cryptokey_data_R':cryptokey_data_R,'cryptokey_data_d':cryptokey_data_d,'cryptokey_msg':cryptokey_msg})
+    return JsonResponse({"compare":compare,"cryptographic":crypto_key_ind,"compare_data_R":compare_data_R,"compare_data_S":compare_data_S,"compare_msg":compare_msg,"cryptokey_data_R":cryptokey_data_R,"cryptokey_data_d":cryptokey_data_d,"cryptokey_msg":cryptokey_msg})
 
 
 
