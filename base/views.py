@@ -37,7 +37,7 @@ def receiver(request):
     file.write(content)
     file.close()
 
-    response = request.body
+    response = json.loads(response.content)
     Q = response["bit"]
     qc = QuantumCircuit(1)
     
@@ -90,7 +90,7 @@ def sender(request):
     file.write(content)
     file.close()
 
-    response = request.body
+    response = request.data
     Q = response["bit"]
     qc = QuantumCircuit(1)
     
