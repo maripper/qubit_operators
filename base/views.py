@@ -64,7 +64,7 @@ def receiver(request):
         state = sim.run(qobj).result().get_statevector()
         # print(state)
         # plot_bloch_multivector(state)
-    
+    print(str(state))
     R = str(state).split("[")[1].split("]")[0].split(",")[1].split(".")[0]
     
     file = open("data_R.txt", "a+")
@@ -118,7 +118,7 @@ def sender(request):
         state = sim.run(qobj).result().get_statevector()
         # print(state)
         # plot_bloch_multivector(state)
-    
+    print(str(state))
     S = str(state).split("[")[1].split("]")[0].split(",")[1].split(".")[0]
         
     file = open("data_S.txt", "a+")
