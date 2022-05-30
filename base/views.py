@@ -38,7 +38,7 @@ def receiver(request):
     file.close()
     # response = json.loads(request.text)
     response = request.POST
-    Q = response["bit"]
+    Q = response["bit"][0]
     qc = QuantumCircuit(1)
     
     print(response)
@@ -94,7 +94,7 @@ def sender(request):
 
     response = request.POST
     sim = Aer.get_backend("aer_simulator")
-    Q = response["bit"]
+    Q = response["bit"][0]
     qc = QuantumCircuit(1)
     
     print(response)
