@@ -36,8 +36,8 @@ def receiver(request):
     content = f"\n{M}"
     file.write(content)
     file.close()
-
-    response = json.loads(response.content)
+    # response = json.loads(request.text)
+    response = json.loads(request.content)
     Q = response["bit"]
     qc = QuantumCircuit(1)
     
