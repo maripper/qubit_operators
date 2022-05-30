@@ -37,7 +37,7 @@ def receiver(request):
     file.write(content)
     file.close()
     # response = json.loads(request.text)
-    response = json.loads(request.content)
+    response = request.POST
     Q = response["bit"]
     qc = QuantumCircuit(1)
     
@@ -90,7 +90,7 @@ def sender(request):
     file.write(content)
     file.close()
 
-    response = request.data
+    response = request.POST
     Q = response["bit"]
     qc = QuantumCircuit(1)
     
@@ -131,7 +131,7 @@ def sender(request):
 @csrf_exempt
 def compare(request):
     # data = request.body
-    data = request.body
+    data = request.POST
     print(data)
     with open("measurements_S.txt") as file:
         file = file.readlines()
