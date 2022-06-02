@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path
 import base.views as views
 urlpatterns = [
-    path('compare/', views.compare,name='compare'),
-    path('restart/', views.restart,name='restart'),
-    path('receiver/', views.receiver,name='receiver'),
-    path('sender/', views.sender,name='sender')
+    # path('compare/', views.compare,name='compare'),
+    # path('restart/', views.restart,name='restart'),
+    # path('receiver/', views.receiver,name='receiver'),
+    # path('sender/', views.sender,name='sender')
+    path('safe_poc/', views.safe_poc,name='safe_poc')
+
 ]
