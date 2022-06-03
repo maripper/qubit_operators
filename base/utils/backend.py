@@ -44,8 +44,9 @@ def safety_check(bits, choice):
 
     sample = []
     print(type(choice),choice)
+    print(choice[0])
 
-    for i in len(choice):
+    for i in range(choice):
 
         # use np.mod to make sure the
 
