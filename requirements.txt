@@ -5,7 +5,6 @@ qiskit-ibmq-provider
 qiskit-ignis
 qiskit-terra
 asgiref==3.5.2
-asgiref==3.4.1
 Django==3.2.13
 mpmath==1.2.1
 ntlm-auth==1.5.0
