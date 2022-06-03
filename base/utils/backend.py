@@ -55,7 +55,7 @@ def safety_check(bits, choice):
         # the list range
         print(i,choice[i])
         print('x',i, type(i),type(bits),bits)
-        if('\n not in choice[i]):
+        if('\n' not in choice[i]):
                 i = np.mod(int(choice[i]), len(bits))
 
         # pop(i) removes the element of the
