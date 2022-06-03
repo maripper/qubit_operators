@@ -43,6 +43,7 @@ def common_ground(S, R, data,n):
 def safety_check(bits, choice):
 
     sample = []
+    print(choice)
 
     for i in choice:
 
