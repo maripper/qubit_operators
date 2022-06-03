@@ -52,6 +52,7 @@ def safety_check(bits, choice):
         # bit we sample is always in
 
         # the list range
+        print('x',i, type(i),type(bits),bits)
 
         i = np.mod(i, len(bits))
 
