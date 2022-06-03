@@ -56,7 +56,7 @@ def safety_check(bits, choice):
         print(i,choice[i])
         print('x',i, type(i),type(bits),bits)
 
-        i = np.mod(choice[i], len(bits))
+        i = np.mod(int(choice[i]), len(bits))
 
         # pop(i) removes the element of the
 
