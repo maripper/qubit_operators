@@ -43,16 +43,16 @@ def common_ground(S, R, data,n):
 def safety_check(bits, choice):
 
     sample = []
-    print(type(choice))
+    print(type(choice),choice)
 
-    for i in choice:
+    for i in len(choice):
 
         # use np.mod to make sure the
 
         # bit we sample is always in
 
         # the list range
-        print(i)
+        print(i,choice[i])
         print('x',i, type(i),type(bits),bits)
 
         i = np.mod(i, len(bits))
