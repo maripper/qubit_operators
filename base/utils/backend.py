@@ -52,9 +52,10 @@ def safety_check(bits, choice):
         # bit we sample is always in
 
         # the list range
+        print(i)
         print('x',i, type(i),type(bits),bits)
 
-        i = np.mod(i, len(bits))
+        i = np.mod(int(i), len(bits))
 
         # pop(i) removes the element of the
 
