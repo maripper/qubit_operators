@@ -43,7 +43,7 @@ def common_ground(S, R, data,n):
 def safety_check(bits, choice):
 
     sample = []
-    print(choice)
+    print(type(choice))
 
     for i in choice:
 
@@ -55,7 +55,7 @@ def safety_check(bits, choice):
         print(i)
         print('x',i, type(i),type(bits),bits)
 
-        i = np.mod(int(i), len(bits))
+        i = np.mod(i, len(bits))
 
         # pop(i) removes the element of the
 
