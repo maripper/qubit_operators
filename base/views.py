@@ -19,8 +19,38 @@ data = []
 # perform business logic
 
 from base.utils.backend import *
+from base.utils.backend_eve import *
 
- 
+@csrf_exempt
+def eve_poc(request):
+    n = int(request.POST['size'])
+    message,sender_bit,sender_base = sender_bits(n)
+    intercepted_message = eve(n,message)
+    receiver_results,receiver_base = receiver_bits(n,message)
+    sample_size = 15
+    bit_selection = randint(n, size=sample_size)
+    _sender_key = sender_key(sender_base, receiver_base, sender_bit,n)
+    _receiver_key = receiver_key(sender_base, receiver_base, receiver_results,n)
+    receiver_sample = safety_check(_receiver_key, bit_selection)
+    print("  receiver_sample = " + str(receiver_sample))
+    sender_sample = safety_check(_sender_key, bit_selection)
+    print("sender_sample = "+ str(sender_sample))
+    status = compare(sender_sample,receiver_sample)
+    sender_base_new = []
+    receiver_base_new = []
+    for i in range(len(sender_base)):
+        if int(sender_base[i])==0:
+            sender_base_new.append('z')
+        else:
+            sender_base_new.append('x')
+    for i in range(len(receiver_base)):
+        if int(receiver_base[i])==0:
+            receiver_base_new.append('z')
+        else:
+            receiver_base_new.append('x')
+    context = json.dumps({'sender_bits':[int (s) for s in sender_bit],'sender_base':sender_base_new,'receiver_base':receiver_base_new,'intercepted_message':[str(m) for m in intercepted_message],'status':str(status),'sender_key':[int (s) for s in _sender_key],'sender_sample':[int (s) for s in sender_sample],'receiver_key':[int (s) for s in _receiver_key],'receiver_sample':[int (s) for s in receiver_sample],'receiver_data':[int (s) for s in receiver_results],'sender_data':[int (s) for s in sender_bit],'n':int(n)})
+    return JsonResponse({'context':context})
+
 
 @csrf_exempt
 
@@ -46,7 +76,21 @@ def safe_poc(request):
 
     # context = {'status':status,'sender_key':sender_key,'sender_sample':sender_sample,'receiver_key':receiver_key,'receiver_sample':receiver_sample,'receiver_results':receiver_results,'message':message,'sender_bit':sender_bit,'sender_base':sender_base,'n':int(n)}
 
-    context = json.dumps({'status':str(status),'sender_key':[int (s) for s in sender_key],'sender_sample':[int (s) for s in sender_sample],'receiver_key':[int (s) for s in receiver_key],'receiver_sample':[int (s) for s in receiver_sample],'receiver_results':[int (s) for s in receiver_results],'sender_bits':[int (s) for s in sender_bit],'sender_base':[int (s) for s in sender_base],'n':int(n)})
+    # context = json.dumps({'message':str(message),'status':str(status),'sender_key':[int (s) for s in sender_key],'sender_sample':[int (s) for s in sender_sample],'receiver_key':[int (s) for s in receiver_key],'receiver_sample':[int (s) for s in receiver_sample],'receiver_results':[int (s) for s in receiver_results],'sender_bits':[int (s) for s in sender_bit],'sender_base':[int (s) for s in sender_base],'n':int(n)})
+    print({'sender_base':sender_base,'receiver_base':receiver_base})
+    sender_base_new = []
+    receiver_base_new = []
+    for i in range(len(sender_base)):
+        if int(sender_base[i])==0:
+            sender_base_new.append('z')
+        else:
+            sender_base_new.append('x')
+    for i in range(len(receiver_base)):
+        if int(receiver_base[i])==0:
+            receiver_base_new.append('z')
+        else:
+            receiver_base_new.append('x')
+    context = json.dumps({'sender_bit':[int (s) for s in sender_bit],'sender_base':sender_base_new,'receiver_base':receiver_base_new,'message':str(message),'status':str(status),'sender_key':[int (s) for s in sender_key],'receiver_key':[int (s) for s in receiver_key],'sender_sample':[int (s) for s in sender_sample],'receiver_sample':[int (s) for s in receiver_sample],'receiver_data':[int (s) for s in receiver_results],'sender_data':[int (s) for s in sender_bit],'n':int(n)})
 
     print(context)
 

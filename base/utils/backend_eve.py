@@ -55,8 +55,8 @@ def safety_check(bits, choice):
         # the list range
         print(i,choice[i])
         print('x',i, type(i),type(bits),bits)
-        if('\n' not in choice[i]):
-            print('SAMPLE')
+        if('\n' not in str(choice[i])):
+            print('enter')
             i = np.mod(int(choice[i]), len(bits))
             sample.append(bits.pop(i))
         # pop(i) removes the element of the
@@ -227,42 +227,23 @@ def measure_message(message, bases,n):
 
 def sender_bits(n):
 
-    np.random.seed(seed=0)
-
+    np.random.seed(seed=3)
     ## Step 1
-
-    # sender generates bits
-
     sender_bit = randint(2, size=n)
-
-    print('bits',sender_bit)
-
-    #encode each bit on qubit in the  X  or  Z -basis at random, and stores the choice for each qubit in sender_bases. In this case, a 0 means "prepare in the  Z -basis", and a 1 means "prepare in the  X -basis"
-
-    # Create an array to tell us which qubits
-
-    # are encoded in which bases
-
+    ## Step 2
     sender_bases = randint(2, size=n)
-
-    print('base',sender_bases)
-
- 
-
     message = encode_message(sender_bit, sender_bases,n)
 
     return(message,sender_bit,sender_bases)
 
- 
-
+def eve(n,message):
+    eve_bases = randint(2, size=n)
+    intercepted_message = measure_message(message, eve_bases,n)
+    return eve_bases,intercepted_message
 def receiver_bits(n,message):
+    receiver_base = randint(2, size=n)
+    receiver_results = measure_message(message, receiver_base,n)
 
-  receiver_base = randint(2, size=n)
-
-  receiver_results = measure_message(message, receiver_base,n)
-
-  print(receiver_results)
-
-  return receiver_results,receiver_base
-
+    return receiver_results,receiver_base
+    
  
