@@ -21,6 +21,8 @@ urlpatterns = [
     path('restart/', views.restart,name='restart'),
     path('receiver/', views.receiver,name='receiver'),
     path('sender/', views.sender,name='sender'),
+    path('encrypt/', views.encrypt,name='encrypt'),
+    path('decrypt/', views.decrypt,name='decrypt'),
     path('safe_poc/', views.safe_poc,name='safe_poc'),
     path('eve_poc/', views.eve_poc,name='eve_poc')
 

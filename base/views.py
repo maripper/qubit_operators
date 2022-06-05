@@ -20,7 +20,51 @@ data = []
 
 from base.utils.backend import *
 from base.utils.backend_eve import *
+@csrf_exempt
+def encrypt(request):
+    data = request.body.decode('ascii')
+    data = request.FILES['upload'].read().decode('ascii')
+    print(data)
+    sender_key = data.split('[')[1].split(']')[0].split(',')
+    print(len(sender_key),sender_key)
+    msg = randint(2, size=len(sender_key))
+    print('msg',[int(m) for m in msg])
+    # msg =  data['msg']
+    results = []
+    for i in range(len(sender_key)):
+        if(int(sender_key[i])==1 and int(msg[i])==1):
+            results.append(0)
+        if(int(sender_key[i])==1 and int(msg[i])==0):
+            results.append(1)
+        if(int(sender_key[i])==0 and int(msg[i])==1):
+            results.append(1)
+        if(int(sender_key[i])==0 and int(msg[i])==0):
+            results.append(0)
+    print(results)
+    return JsonResponse({'encrypted_msg':results,'msg':[int(m) for m in msg]})
 
+@csrf_exempt
+def decrypt(request):
+    # data = request.body.decode('ascii')
+    data = request.FILES['upload'].read().decode('ascii')
+    print(data)
+    receiver_key = data.split('[')[1].split(']')[0].split(',')
+    msg =  request.POST.getlist('msg')
+    print('msg',msg)
+    # msg = msg['msg']
+    results = []
+    for i in range(len(receiver_key)):
+        if(int(receiver_key[i])==1 and int(msg[i])==1):
+            results.append(0)
+        if(int(receiver_key[i])==1 and int(msg[i])==0):
+            results.append(1)
+        if(int(receiver_key[i])==0 and int(msg[i])==1):
+            results.append(1)
+        if(int(receiver_key[i])==0 and int(msg[i])==0):
+            results.append(0)
+    print(results)
+    return JsonResponse({'decrypt_msg':results})
+    
 @csrf_exempt
 def eve_poc(request):
     n = int(request.POST['size'])
