@@ -40,7 +40,7 @@ def encrypt(request):
             results.append(1)
         if(int(sender_key[i])==0 and int(msg[i])==0):
             results.append(0)
-    print(results)
+    # print(results)
     return JsonResponse({'encrypted_msg':results,'msg':[int(m) for m in msg]})
 
 @csrf_exempt
