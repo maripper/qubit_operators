@@ -52,6 +52,7 @@ def eve_poc(request):
     return JsonResponse({'context':context})
 
 
+
 @csrf_exempt
 
 def safe_poc(request):
