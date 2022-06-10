@@ -116,7 +116,8 @@ def period_finder(n, m, a):
     return qc
 
 
-def rsa_page(N):
+def rsa_page():
+    N=15
     import random
 
     a = randint(2, N) # 1 < a < 
