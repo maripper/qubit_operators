@@ -46,6 +46,8 @@ qiskit-aer==0.10.3
 
 qiskit-ibmq-provider==0.18.3
 
+qiskit.aqua
+
 qiskit-ignis==0.7.0
 
 qiskit-terra==0.19.2

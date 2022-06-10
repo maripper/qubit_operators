@@ -25,6 +25,7 @@ urlpatterns = [
     path('coding_decoding/', views.coding_decoding,name='coding_decoding'),
     path('decrypt/', views.decrypt,name='decrypt'),
     path('safe_poc/', views.safe_poc,name='safe_poc'),
+    path('factors/', views.factors,name='factors'),
     path('eve_poc/', views.eve_poc,name='eve_poc')
 
 
