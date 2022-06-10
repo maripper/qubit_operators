@@ -33,12 +33,14 @@ data = []
 def factors(request):
     n = request.POST['n']
      # Specifies the quantum device
+    
     IBMQ.enable_account('fec810ec80687fe32402ab3712124cd4253342e1d18eda4f6305f553c921fc40e5d10a0bf7b17b890f949011a21d81666f10bb2f34bb2128427f2293dce443c9') # Enter your API token here
     provider = IBMQ.get_provider(hub='ibm-q')
     backend = provider.get_backend('ibmq_qasm_simulator')
+    
     print(int(n))
     factors = Shor(int(n)) # Enter Integer to obtain its factors
-    result_dict = factors.run(QuantumInstance(backend, shots=6, skip_qobj_validation=False))
+    result_dict = factors.run(QuantumInstance(backend, shots=5, skip_qobj_validation=False))
     print(result_dict)
     Factors = result_dict['factors'] # Get factors from results
     print(Factors)
