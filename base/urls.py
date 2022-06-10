@@ -22,8 +22,10 @@ urlpatterns = [
     path('receiver/', views.receiver,name='receiver'),
     path('sender/', views.sender,name='sender'),
     path('encrypt/', views.encrypt,name='encrypt'),
+    path('coding_decoding/', views.coding_decoding,name='coding_decoding'),
     path('decrypt/', views.decrypt,name='decrypt'),
     path('safe_poc/', views.safe_poc,name='safe_poc'),
     path('eve_poc/', views.eve_poc,name='eve_poc')
+
 
 ]
